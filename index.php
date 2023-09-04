@@ -8,9 +8,10 @@
 
 
     <?php include 'header.php';?>
-    <div class="content">
+    <h2>Nos produits phares :</h2>
+
         <?php include 'item.php';?>
-    </div>
+
 <?php include 'footer.php';?>
 
 
