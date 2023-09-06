@@ -18,10 +18,10 @@ body{
 
 }
 main{
-    display: grid;
-    grid-template-columns: repeat(12,1fr);
-    grid-template-rows: 5rem 1fr 1fr;
-    grid-gap: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+
 }
 main>h2{
     grid-row: 1/2;
@@ -29,14 +29,7 @@ main>h2{
     text-align: center;
     border:2px solid black ;
 }
-#produit1{
-    grid-row: 2/3;
-    grid-column: 4/5;
 
-}
-#produit2{
-    grid-row: 2/3;
-    grid-column: 9/10;
 
 }
 
