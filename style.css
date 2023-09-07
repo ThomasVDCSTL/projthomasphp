@@ -34,9 +34,9 @@ main>h2{
 
 .produit{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     flex-direction: column;
-    width: fit-content;
+    width: 424px;
     align-items: center;
     border:2px solid black ;
     padding: 10px;
@@ -45,4 +45,37 @@ main>h2{
 .produit>img{
     height: 20rem;
     width: 25rem;
+    margin-bottom: 12px;
+}
+.texte_produit{
+    width: 400px;
+    height: 100%;
+    display: flex;
+    flex-flow: wrap column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.gras{
+    width: 100%;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 0px;
+
+}
+.texte_produit>p{
+    justify-self: center;
+}
+.texte_produit>button{
+    align-self: flex-end;
+    margin-bottom: 12px;
+}
+.gras>p{
+    margin: 0px;
+    font-weight: bold;
+}
+.gras:first-child{
+    font-size: larger;
 }

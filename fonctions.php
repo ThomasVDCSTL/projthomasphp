@@ -1,13 +1,20 @@
 <?php
 global $articles;
-function display_articles()
+function display_articles(): void
 {
     global $articles;
     foreach ($articles as $nom => $article):?>
         <div class="produit">
-            <h3><?php echo $nom;
-                ?></h3>
-            <p><?php echo $article["description"] ?></p>
+            <div class="texte_produit">
+                <div class="gras">
+                    <p><?php echo $nom; ?></p>
+                    <p><?php echo formatPrice($article["prix"]); ?></p>
+                </div>
+                <p><?php echo $article["description"] ?></p>
+                <button <?php if ($article["quantité"] < 1): ?>disabled<?php endif;
+                ?>>Ajouter<br>au panier
+                </button>
+            </div>
             <img src="<?php echo $article["photo"] ?>" alt="photo de<?php echo $nom ?>">
         </div>
     <?php endforeach;
@@ -15,7 +22,7 @@ function display_articles()
 
 function formatPrice(float $price): string
 {
-    return number_format($price / 100, 2, ",", " ") . ' €';
+    return number_format($price, 2, ",", " ") . ' €';
 }
 
 //echo formatPrice(1000);
