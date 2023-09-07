@@ -42,4 +42,7 @@ function discountedPrice(float $price, float $discount): float
 
 //echo formatPrice(discountedPrice(1000, 20));
 
+function display_cart(): void
+{
 
+}

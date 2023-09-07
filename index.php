@@ -1,5 +1,5 @@
 <?php
-    $nom_page="Projet PHP Thomas";
+    $nom_page="Produits";
 ?>
 
 <?php include 'header.php';?>

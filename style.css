@@ -39,13 +39,13 @@ main>h2{
     width: 424px;
     align-items: center;
     border:2px solid black ;
-    padding: 10px;
+    padding: 2rem;
     background: forestgreen;
 }
 .produit>img{
     height: 20rem;
     width: 25rem;
-    margin-bottom: 12px;
+    margin-bottom: 2rem;
 }
 .texte_produit{
     width: 400px;
@@ -70,7 +70,7 @@ main>h2{
 }
 .texte_produit>button{
     align-self: flex-end;
-    margin-bottom: 12px;
+    margin-bottom: 2rem;
 }
 .gras>p{
     margin: 0px;
@@ -78,4 +78,26 @@ main>h2{
 }
 .gras:first-child{
     font-size: larger;
+}
+div{
+    border: black 2px solid;
+}
+.piano{
+    width: 85%;
+    height: 35rem;
+    display: flex;
+    flex-direction: row;
+}
+.panier,.total{
+    margin: 20px;
+    width: 50%;
+    padding-inline: 1rem;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1rem;
+}
+.formulaire{
+    width: auto;
+    padding: 1rem;
+    height: 100%;
 }
