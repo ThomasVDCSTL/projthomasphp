@@ -6,6 +6,7 @@
     align-items: center ;
     border:2px solid black ;
     background: #ff00eb;
+    margin: 0;
 }
 .navbar>img{
     border-radius: 20px;
@@ -14,18 +15,20 @@
 }
 
 body{
-    font-family: Inter;
-
+    font-family: Inter ;
+    padding-top: 0px;
+    margin: 0px;
 }
 main{
     width: 100%;
     display: flex;
     justify-content: space-around;
-
+    flex-wrap: wrap;
 }
 main>h2{
     text-align: center;
     border:2px solid black ;
+    width: 100%;
 }
 
 
@@ -33,7 +36,7 @@ main>h2{
     display: flex;
     justify-content: center;
     flex-direction: column;
-    width: 100%;
+    width: fit-content;
     align-items: center;
     border:2px solid black ;
     padding: 10px;

@@ -12,15 +12,5 @@ $articles = array(
         )
 );
 
-foreach ($articles as $nom => $article):?>
-    <div class="produit">
-        <h3><?php echo $article["prix"]," € ",$nom;
-            ?></h3>
-        <p><?php echo $article["description"]?></p>
-        <img src="<?php echo $article["photo"] ?>" alt="photo de<?php echo $nom?>">
-    </div>
-<?php endforeach;
 
-
-?>
 
