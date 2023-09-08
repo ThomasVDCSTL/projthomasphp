@@ -1,5 +1,6 @@
 <?php
 global $articles;
+global $panier;
 function display_articles(): void
 {
     global $articles;
@@ -13,10 +14,10 @@ function display_articles(): void
                 <p><?php echo $article["description"] ?></p>
                 <div class="ajout_panier">
                     <form action="item.php" method="get">
-                        <label class="quantity" for="quantity">Quantité : </label><input type="number" max="99" min="1" value="1">
+                        <label class="quantity" for="quantity">Quantité : </label><input type="number" id="quantity" max="99" min="1" value="1">
                     </form>
                     <button <?php if ($article["quantité"] < 1): ?>disabled class="indispo">Produit<br>indisponible<?php else:
-                    ?> class="dispo" >Ajouter<br>au panier<?php endif;
+                    ?> class="dispo" >Ajouter<br>au panier <?php endif;
                     ?>
                     </button>
                 </div>
@@ -52,3 +53,10 @@ function display_cart(): void
 {
 
 }
+
+function import_to_panier(array $produit, int $nb):void
+{
+    global $panier;
+    $panier[]=$produit;
+    $panier[$produit]["quantité"]=$nb;
+};
