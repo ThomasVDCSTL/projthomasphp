@@ -156,6 +156,32 @@ select{
     width: 100%;
     padding: 5px;
 }
+table,thead,tr{
+    width: 100%;
+}
+tr{
+    display: flex;
+    border: 1px solid black;
+}
+th{
+    width: 14%;
+    border: 1px solid black;
+}
+.span3{
+    width: 41%;
+}
+.total{
+    display: flex;
+    justify-content: space-between;
+    height: 8%;
+}
+table{
+    height: 80%;
+}
+.prixTotalPanier{
+    display: flex ;
+    align-items: center;
+}
 
 
 

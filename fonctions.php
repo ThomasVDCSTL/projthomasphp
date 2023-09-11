@@ -65,5 +65,4 @@ function import_to_panier(array $produit, int $nb): void
     $produit["quantité"]=$nb;
     $panier[] = $produit;
     $_SESSION["panier"]=$panier;
-
 };

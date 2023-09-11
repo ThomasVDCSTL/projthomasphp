@@ -7,7 +7,7 @@ include 'item.php';
 if (isset($_GET["AjoutPanier"])){
     import_to_panier($articles[$_GET['nomProduit']],$_GET["quantité"]);
 }
-
+global $panier;
 ?>
 
 <?php
@@ -43,29 +43,33 @@ if (isset($_GET["AjoutPanier"])){
         </div>
         <div class="panier">
             <h3>Panier</h3>
-            <div>
-                <table>
-                    <thead>
+            <table>
+                <thead>
+                <tr>
+                    <th class="span3" scope="col" colspan="3">Nom</th>
+                    <th scope="col">Prix unitaire</th>
+                    <th scope="col">Quantité</th>
+                    <th scope="col">Prix HT</th>
+                    <th scope="col">Prix TTC</th>
+                </tr>
+                </thead>
+                <?php foreach($panier as $nom => $achat){?>
                     <tr>
-                        <th>Nom</th>
-                        <th>Prix unitaire</th>
-                        <th>Quantité</th>
-                        <th>Prix HT</th>
-                        <th>Prix TTC</th>
+                        <th class="span3" scope="col"><?php echo $achat["nom"]?></th>
+                        <th scope="col"><?php echo $achat['prix']?></th>
+                        <th scope="col"><?php echo $achat['quantité']?></th>
+                        <th scope="col"><?php echo $achat['prix']?></th>
+                        <th scope="col"><?php echo $achat['prix']?></th>
                     </tr>
-                    </thead>
-                    <?php foreach($panier as $achat){?>
-                        <tr>
-                        <th>Nom</th>
-                        <th>Prix unitaire</th>
-                        <th>Quantité</th>
-                        <th>Prix HT</th>
-                        <th>Prix TTC</th>
-                    </tr>
-                        <?php }?>
-                </table>
+                    <?php }?>
+            </table>
+            <div class="total">
+                <button>Valider Panier</button>
+                <button type="button" <?php $panier=array()?> >Vider Panier</button>
+                <div class="prixTotalPanier">
+                    Prix total TTC : <?php ?>
+                </div>
             </div>
-
         </div>
     </div>
 
