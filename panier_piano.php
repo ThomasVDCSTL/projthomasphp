@@ -1,8 +1,18 @@
 <?php
 $nom_page = "Panier";
+include 'header.php';
+include 'fonctions.php';
+include 'item.php';
+
+if (isset($_GET["AjoutPanier"])){
+    import_to_panier($articles[$_GET['nomProduit']],$_GET["quantité"]);
+}
+
 ?>
 
-<?php include 'header.php'; ?>
+<?php
+
+?>
     <h2>Votre Panier :</h2>
     <div class="piano">
         <div class="infos">
@@ -33,6 +43,28 @@ $nom_page = "Panier";
         </div>
         <div class="panier">
             <h3>Panier</h3>
+            <div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prix unitaire</th>
+                        <th>Quantité</th>
+                        <th>Prix HT</th>
+                        <th>Prix TTC</th>
+                    </tr>
+                    </thead>
+                    <?php foreach($panier as $achat){?>
+                        <tr>
+                        <th>Nom</th>
+                        <th>Prix unitaire</th>
+                        <th>Quantité</th>
+                        <th>Prix HT</th>
+                        <th>Prix TTC</th>
+                    </tr>
+                        <?php }?>
+                </table>
+            </div>
 
         </div>
     </div>

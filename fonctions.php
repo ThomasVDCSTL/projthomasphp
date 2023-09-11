@@ -13,13 +13,14 @@ function display_articles(): void
                 </div>
                 <p><?php echo $article["description"] ?></p>
                 <div class="ajout_panier">
-                    <form action="item.php" method="get">
-                        <label class="quantity" for="quantity">Quantité : </label><input type="number" id="quantity" max="99" min="1" value="1">
+                    <form action="panier_piano.php" method="get">
+                        <label class="quantity" for="quantity">Quantité : </label><input type="number" name="quantité" max="99" min="1" value="1">
+                        <input type="hidden" name="nomProduit" value="<?php echo $nom ?>">
+                        <button name="AjoutPanier" type="submit" <?php if ($article["quantité"] < 1): ?>disabled class="indispo">Produit<br>indisponible<?php else:
+                        ?> class="dispo" >Ajouter<br>au panier <?php endif;
+                        ?>
+                        </button>
                     </form>
-                    <button <?php if ($article["quantité"] < 1): ?>disabled class="indispo">Produit<br>indisponible<?php else:
-                    ?> class="dispo" >Ajouter<br>au panier <?php endif;
-                    ?>
-                    </button>
                 </div>
             </div>
             <img src="<?php echo $article["photo"] ?>" alt="photo de<?php echo $nom ?>">
@@ -54,9 +55,15 @@ function display_cart(): void
 
 }
 
-function import_to_panier(array $produit, int $nb):void
+
+
+$panier = $_SESSION["panier"];
+
+function import_to_panier(array $produit, int $nb): void
 {
     global $panier;
-    $panier[]=$produit;
-    $panier[$produit]["quantité"]=$nb;
+    $produit["quantité"]=$nb;
+    $panier[] = $produit;
+    $_SESSION["panier"]=$panier;
+
 };
