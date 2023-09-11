@@ -14,14 +14,7 @@ $articles = array(
         )
 );
 
-$panier= array(
 
-);
-
-$info_form=array(
-
-
-);
 
 
 
