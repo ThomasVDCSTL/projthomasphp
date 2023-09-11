@@ -50,10 +50,7 @@ function discountedPrice(float $price, float $discount): float
 
 //echo formatPrice(discountedPrice(1000, 20));
 
-function display_cart(): void
-{
 
-}
 
 
 
@@ -61,8 +58,44 @@ $panier = $_SESSION["panier"];
 
 function import_to_panier(array $produit, int $nb): void
 {
+        global $panier;
+        $produit["quantité"]=$nb;
+        $panier[$produit['nom']] = $produit;
+        $_SESSION["panier"]=$panier;
+}
+
+function calcShipment1(): float
+{
     global $panier;
-    $produit["quantité"]=$nb;
-    $panier[] = $produit;
-    $_SESSION["panier"]=$panier;
-};
+    if (totalWeight($panier) < 500) {
+        return 500;
+    } elseif (totalWeight($panier) < 2000) {
+        return totalTTC($panier) * 0.1;
+    } else {
+        return 0;
+    }
+}
+
+function calcShipment2(): float
+{
+    global $panier;
+    if (totalWeight($panier) < 500) {
+        return 1000;
+    } elseif (totalWeight($panier) < 3000) {
+        return totalTTC($panier) * 0.05;
+    } else {
+        return 0;
+    }
+}
+
+function calcShipment3(): float
+{
+    global $panier;
+    if (totalWeight($panier) < 100) {
+        return 750;
+    } elseif (totalWeight($panier) < 4000) {
+        return totalTTC($panier) * 0.07;
+    } else {
+        return 0;
+    }
+}

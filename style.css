@@ -159,16 +159,19 @@ select{
 table,thead,tr{
     width: 100%;
 }
+thead{
+    margin-bottom: 200px;
+}
 tr{
     display: flex;
-    border: 1px solid black;
 }
 th{
     width: 14%;
-    border: 1px solid black;
+    display: flex;
+    justify-content: flex-start;
 }
 .span3{
-    width: 41%;
+    width: 36%;
 }
 .total{
     display: flex;

@@ -4,10 +4,22 @@ include 'header.php';
 include 'fonctions.php';
 include 'item.php';
 
-if (isset($_GET["AjoutPanier"])){
-    import_to_panier($articles[$_GET['nomProduit']],$_GET["quantité"]);
+if (isset($_GET["AjoutPanier"])) {
+    if (!isset($panier[$_GET['nomProduit']])) {
+        import_to_panier($articles[$_GET['nomProduit']], $_GET["quantité"]);
+    }
+    elseif ($_GET["quantité"]!=$panier[$_GET['nomProduit']]["quantité"]){import_to_panier($articles[$_GET['nomProduit']], $_GET["quantité"]);}
 }
+elseif (isset($_GET['viderPanier'])){foreach ($panier as $key=>$value)
+    {
+        unset($panier[$key]);
+        unset($_SESSION["panier"][$key]);
+    }
+}
+elseif (isset($_GET['supprArticle'])){unset($panier[$_GET['nomArticleSuppr']]);unset($_SESSION["panier"][$_GET['nomArticleSuppr']]);}
+
 global $panier;
+$prixTotal=0;
 ?>
 
 <?php
@@ -46,6 +58,7 @@ global $panier;
             <table>
                 <thead>
                 <tr>
+                    <th>Supprimer</th>
                     <th class="span3" scope="col" colspan="3">Nom</th>
                     <th scope="col">Prix unitaire</th>
                     <th scope="col">Quantité</th>
@@ -55,19 +68,27 @@ global $panier;
                 </thead>
                 <?php foreach($panier as $nom => $achat){?>
                     <tr>
+                        <th><form action="panier_piano.php" method="get">
+                                <input type="hidden" name="nomArticleSuppr" value=<?php echo $nom ?>>
+                                <button type="submit" name="supprArticle" value="true"<?php $panier=array()?> >x</button>
+                            </form></th>
                         <th class="span3" scope="col"><?php echo $achat["nom"]?></th>
-                        <th scope="col"><?php echo $achat['prix']?></th>
+                        <th scope="col"><?php echo formatPrice($achat['prix'])?></th>
                         <th scope="col"><?php echo $achat['quantité']?></th>
-                        <th scope="col"><?php echo $achat['prix']?></th>
-                        <th scope="col"><?php echo $achat['prix']?></th>
+                        <th scope="col"><?php echo formatPrice(priceExcludingVAT($achat['prix']*$achat['quantité'], 20))?></th>
+                        <th scope="col"><?php echo formatPrice($achat['prix']*$achat['quantité']); $prixTotal=$prixTotal+$achat['prix']*$achat['quantité']?></th>
                     </tr>
                     <?php }?>
             </table>
             <div class="total">
                 <button>Valider Panier</button>
-                <button type="button" <?php $panier=array()?> >Vider Panier</button>
+                <form action="panier_piano.php" method="get">
+                    <button type="submit" name="viderPanier" value="true"<?php $panier=array()?> >Vider Panier</button>
+                </form>
                 <div class="prixTotalPanier">
-                    Prix total TTC : <?php ?>
+                    Prix total TTC : <?php
+                        echo formatPrice($prixTotal)
+                    ?>
                 </div>
             </div>
         </div>
@@ -75,3 +96,4 @@ global $panier;
 
 
 <?php include 'footer.php'; ?>
+
