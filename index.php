@@ -7,7 +7,7 @@
 
         <?php include 'item.php';?>
         <?php include 'fonctions.php';
-        display_articles();
+        display_articles($articles);
         ?>
 
 

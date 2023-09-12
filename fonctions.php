@@ -1,9 +1,8 @@
 <?php
 global $articles;
 global $panier;
-function display_articles(): void
+function display_articles(array $articles): void
 {
-    global $articles;
     foreach ($articles as $nom => $article):?>
         <div class="produit">
             <div class="texte_produit">
