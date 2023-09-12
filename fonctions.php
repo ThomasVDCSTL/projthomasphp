@@ -64,38 +64,53 @@ function import_to_panier(array $produit, int $nb): void
         $_SESSION["panier"]=$panier;
 }
 
-function calcShipment1(): float
+function calcShipment1(array $panier): float
 {
-    global $panier;
     if (totalWeight($panier) < 500) {
-        return 500;
+        return 5;
     } elseif (totalWeight($panier) < 2000) {
-        return totalTTC($panier) * 0.1;
+        return prix_panier($panier) * 0.1;
     } else {
-        return 0;
+        return 1;
     }
 }
 
-function calcShipment2(): float
+function calcShipment2(array $panier): float
 {
-    global $panier;
     if (totalWeight($panier) < 500) {
-        return 1000;
+        return 10;
     } elseif (totalWeight($panier) < 3000) {
-        return totalTTC($panier) * 0.05;
+        return prix_panier($panier) * 0.05;
+    } else {
+        return 50;
+    }
+}
+
+function calcShipment3(array $panier): float
+{
+    if (totalWeight($panier) < 100) {
+        return 7.50;
+    } elseif (totalWeight($panier) < 4000) {
+        return prix_panier($panier) * 0.07;
     } else {
         return 0;
     }
 }
 
-function calcShipment3(): float
+function totalWeight(array $panier) : float
 {
-    global $panier;
-    if (totalWeight($panier) < 100) {
-        return 750;
-    } elseif (totalWeight($panier) < 4000) {
-        return totalTTC($panier) * 0.07;
-    } else {
-        return 0;
-    }
+    $poid=0;
+    foreach ($panier as $article){
+        $poid=$poid+$article['poid']*$article['quantité'];
+    };
+    return $poid;
+}
+
+function prix_panier(array $panier): float
+{
+    $prix=0;
+    foreach ($panier as $article){
+        $prix=$prix+$article['prix']*$article['quantité'];
+    };
+    return $prix;
 }

@@ -7,6 +7,7 @@ $articles = array(
             "description"=>'"He protec ..."',
             "quantité"=>12,
             "carted"=>false,
+            "poid"=>300,
         ),
         "Steph" => array(
             "nom"=>"Steph",
@@ -15,6 +16,7 @@ $articles = array(
             "description"=>'"... he attac"',
             "quantité"=>5,
             "carted"=>false,
+            "poid"=>2000,
         )
 );
 

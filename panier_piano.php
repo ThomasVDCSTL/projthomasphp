@@ -43,11 +43,10 @@ $prixTotal=0;
                     <fieldset class="ville"><legend>Ville :</legend><input type="text" placeholder="Grenoble city gang"></fieldset>
                     <fieldset class="pays"><legend>Pays :</legend><input type="text" placeholder="MA FRANCE"></fieldset>
                     <fieldset class="transporteur"><legend>Choix du transporteur :</legend><select >
-                            <option selected>BM Double-Pied</option>
-                            <option value="La_Poste">La Poste</option>
-                            <option value="DHL">DHL</option>
-                            <option value="FedEx">FedEx</option>
-                            <option value="UPS">UPS</option>
+                            <option selected>BM Double-Pied (+<?php echo formatPrice(0)?>)</option>
+                            <option value="La_Poste">La Poste (+<?php echo formatPrice(calcShipment1($panier))?>)</option>
+                            <option value="FedEx">FedEx (+<?php echo formatPrice(calcShipment2($panier))?>)</option>
+                            <option value="UPS">UPS (+<?php echo formatPrice(calcShipment3($panier))?>)</option>
                         </select></fieldset>
                 </form>
 
@@ -94,6 +93,7 @@ $prixTotal=0;
         </div>
     </div>
 
+<?php global $prixTotal;
 
-<?php include 'footer.php'; ?>
+include 'footer.php'; ?>
 
