@@ -1,6 +1,6 @@
 <?php
-$articles = array(
-        "Schmongus" => array(
+$articles = [
+        "Schmongus" => [
             "nom"=>"Schmongus",
             "prix"=>45,
             "photo"=>"https://www.cdiscount.com/pdt2/8/9/6/1/350x350/auc7745647210896/rw/nain-de-jardin-exterieur-impermeabiliser-nain-de-j.jpg",
@@ -8,8 +8,8 @@ $articles = array(
             "quantité"=>12,
             "carted"=>false,
             "poid"=>300,
-        ),
-        "Steph" => array(
+        ],
+        "Steph" => [
             "nom"=>"Steph",
             "prix"=>450,
             "photo"=>"https://commentseruiner.com/32058-large_default/nain-de-jardin-i-m-sexy.jpg",
@@ -17,8 +17,8 @@ $articles = array(
             "quantité"=>5,
             "carted"=>false,
             "poid"=>2000,
-        )
-);
+        ]
+];
 
 
 

@@ -107,7 +107,7 @@ $prixTotal = 0;
         <div class="total">
             <button>Valider Panier</button>
             <form action="panier_piano.php" method="get">
-                <button type="submit" name="viderPanier" value="true"<?php $panier = array() ?> >Vider Panier</button>
+                <button type="submit" name="viderPanier" value="true" >Vider Panier</button>
             </form>
             <div class="prixTotalPanier">
                 Prix total TTC : <?php
