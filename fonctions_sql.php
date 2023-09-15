@@ -5,13 +5,13 @@
 
 
 
-function new_customer(string $name, int $phone, int $zip, string $adress, string $city, string $mail): void
+function new_customer(string $name, int $phone, int $zip, string $address, string $city, string $mail): void
 {
-    $sql = 'INSERT INTO customers (customer_id, full_name, phone_number, zip_code, adress, city, mail) VALUES (NULL, ?, ?, ?, ?, ?, ?)';
+    $sql = 'INSERT INTO customers (customer_id, full_name, phone_number, zip_code, address, city, mail) VALUES (NULL, ?, ?, ?, ?, ?, ?)';
     $db = include 'db_mysql.php';
     try {
         $stmt = $db->prepare($sql);
-        $stmt->execute(array($name, $phone, $zip, $adress, $city, $mail));
+        $stmt->execute(array($name, $phone, $zip, $address, $city, $mail));
     } catch (Exception $e) {
         echo $e->getMessage();
     }
