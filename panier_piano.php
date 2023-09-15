@@ -5,11 +5,11 @@ include 'fonctions.php';
 include 'fonctions_sql.php';
 include 'item.php';
 
-if (isset($_GET["AjoutPanier"])) {
-    if (!isset($panier[$_GET['nomProduit']]) || $_GET["quantité"] != $panier[$_GET['nomProduit']]["quantité"]) {
-        import_to_panier($articles[$_GET['nomProduit']], $_GET["quantité"]);
-    }
-}
+//if (isset($_GET["AjoutPanier"])) {
+//    if (!isset($panier[$_GET['nomProduit']]) || $_GET["quantité"] != $panier[$_GET['nomProduit']]["quantité"]) {
+//        import_to_panier($articles[$_GET['nomProduit']], $_GET["quantité"]);
+//    }
+//}
 if (isset($_GET["code-postal"])) {
     new_customer($_GET["nom_prenom"], $_GET["num_tel"], $_GET["code-postal"], $_GET["adresse"], $_GET["ville"], $_GET["mail"]);
     header('Location:http://localhost/projphp/panier_piano.php');

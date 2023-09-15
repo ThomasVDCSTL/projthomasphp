@@ -23,6 +23,26 @@ function new_customer(string $name, int $phone, int $zip, string $address, strin
     unset($db);
 }
 
-function import_to_order(){
+function import_products(): array
+{
+    $sql='SELECT * FROM products';
+    $db=include 'db_mysql.php';
+    $stmt=$db->prepare($sql);
+    $stmt->execute();
+    $products=$stmt->fetchAll();
+    return $products;
+}
 
+
+
+function import_to_panier(int $productID, int $nb): void
+{
+    $sql='INSERT INTO product_order (product_id, order_id, quantity) VALUES (?, ?, ?)';
+    $db=include 'db_mysql.php';
+    try {
+        $stmt = $db->prepare($sql);
+        $stmt->execute(array($productID, $_SESSION['customer_id'], $nb));
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }
 }
