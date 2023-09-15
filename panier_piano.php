@@ -2,6 +2,7 @@
 $nom_page = "Panier";
 include 'header.php';
 include 'fonctions.php';
+include 'fonctions_sql.php';
 include 'item.php';
 
 if (isset($_GET["AjoutPanier"])) {
@@ -9,7 +10,10 @@ if (isset($_GET["AjoutPanier"])) {
         import_to_panier($articles[$_GET['nomProduit']], $_GET["quantité"]);
     }
 }
-
+if (isset($_GET["code-postal"])) {
+    new_customer($_GET["nom_prenom"], $_GET["num_tel"], $_GET["code-postal"], $_GET["adresse"], $_GET["ville"], $_GET["mail"]);
+    header('Location:http://localhost/projphp/panier_piano.php');
+}
 if (isset($_GET['viderPanier'])) {
     foreach ($panier as $key => $value) {
         unset($panier[$key]);
@@ -34,42 +38,47 @@ $prixTotal = 0;
     <div class="infos">
         <h3>Informations de livraison</h3>
         <div class="formulaire">
-            <form action="item.php" method="get">
-                <fieldset class="civilité">
-                    <legend>Civilité :</legend>
-                    <span><input type="radio" name="iel"><label
-                                for="Mr">Mr.</label><input type="radio" name="iel"><label
-                                for="Mme">Mme.</label><input type="radio" name="iel"><label
-                                for="Autre">Autre</label></span></fieldset>
-                <fieldset class="nom_prenom">
-                    <legend>NOM Prénom :</legend>
-                    <input type="text" placeholder="POLESE Maxime"></fieldset>
-                <fieldset class="mail">
-                    <legend>Adresse Mail :</legend>
-                    <input type="text" placeholder="jadorelePHP@ptdr.mourir"></fieldset>
-                <fieldset class="telephone">
-                    <legend>Tél. Portable :</legend>
-                    <input type="tel" placeholder="J'ai pas de téléphone"></fieldset>
-                <fieldset class="code_postal">
-                    <legend>Code Postal :</legend>
-                    <input type="text" placeholder="38000 la zone"></fieldset>
-                <fieldset class="adresse">
-                    <legend>Adresse :</legend>
-                    <input type="text" placeholder="23 Rue des légendes"></fieldset>
-                <fieldset class="ville">
-                    <legend>Ville :</legend>
-                    <input type="text" placeholder="Grenoble city gang"></fieldset>
-                <fieldset class="pays">
-                    <legend>Pays :</legend>
-                    <input type="text" placeholder="MA FRANCE"></fieldset>
+            <form action="panier_piano.php" method="GET">
+                <?php if (!isset($_SESSION['customer_id'])) { ?>
+                    <fieldset class="civilité">
+                        <legend>Civilité :</legend>
+                        <span><input type="radio" name="iel"><label
+                                    for="Mr">Mr.</label><input type="radio" name="iel"><label
+                                    for="Mme">Mme.</label><input type="radio" name="iel"><label
+                                    for="Autre">Autre</label></span></fieldset>
+                    <fieldset class="nom_prenom">
+                        <legend>NOM Prénom :</legend>
+                        <input type="text" placeholder="POLESE Maxime" name="nom_prenom"></fieldset>
+                    <fieldset class="mail">
+                        <legend>Adresse Mail :</legend>
+                        <input type="text" placeholder="jadorelePHP@ptdr.mourir" name="mail"></fieldset>
+                    <fieldset class="telephone">
+                        <legend>Tél. Portable :</legend>
+                        <input type="tel" placeholder="J'ai pas de téléphone" name="num_tel"></fieldset>
+                    <fieldset class="code_postal">
+                        <legend>Code Postal :</legend>
+                        <input type="text" placeholder="38000 la zone" name="code-postal"></fieldset>
+                    <fieldset class="adresse">
+                        <legend>Adresse :</legend>
+                        <input type="text" placeholder="23 Rue des légendes" name="adresse"></fieldset>
+                    <fieldset class="ville">
+                        <legend>Ville :</legend>
+                        <input type="text" placeholder="Grenoble city gang" name="ville"></fieldset>
+                    <fieldset class="pays">
+                        <legend>Pays :</legend>
+                        <input type="text" placeholder="MA FRANCE" name="pays"></fieldset>
+                <?php } else { ?>
+                    <p>Infos déjà enregistrées</p>
+                <?php } ?>
                 <fieldset class="transporteur">
                     <legend>Choix du transporteur :</legend>
-                    <select>
-                        <option selected>BM Double-Pied (+<?php echo formatPrice(0) ?>)</option>
-                        <option value="La_Poste">La Poste (+<?php echo formatPrice(calcShipment1($panier)) ?>)</option>
-                        <option value="FedEx">FedEx (+<?php echo formatPrice(calcShipment2($panier)) ?>)</option>
-                        <option value="UPS">UPS (+<?php echo formatPrice(calcShipment3($panier)) ?>)</option>
+                    <select name="transporteur">
+                        <option selected>BM Double-Pied (+ <?php echo formatPrice(0) ?>)</option>
+                        <option value="La_Poste">La Poste (+ <?php echo formatPrice(calcShipment1($panier)) ?>)</option>
+                        <option value="FedEx">FedEx (+ <?php echo formatPrice(calcShipment2($panier)) ?>)</option>
+                        <option value="UPS">UPS (+ <?php echo formatPrice(calcShipment3($panier)) ?>)</option>
                     </select></fieldset>
+                <button type="submit" class="bouton_valider">valider infos</button>
             </form>
 
         </div>
@@ -107,7 +116,7 @@ $prixTotal = 0;
         <div class="total">
             <button>Valider Panier</button>
             <form action="panier_piano.php" method="get">
-                <button type="submit" name="viderPanier" value="true" >Vider Panier</button>
+                <button type="submit" name="viderPanier" value="true">Vider Panier</button>
             </form>
             <div class="prixTotalPanier">
                 Prix total TTC : <?php

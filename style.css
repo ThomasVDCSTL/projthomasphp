@@ -150,7 +150,7 @@ fieldset>input{
     width: 60.5%;
 }
 .transporteur{
-    width: 100%;
+    width: 60%;
 }
 select{
     width: 100%;
@@ -184,6 +184,11 @@ table{
 .prixTotalPanier{
     display: flex ;
     align-items: center;
+}
+.bouton_valider{
+    height: 10%;
+    justify-self: flex-end;
+    align-self: flex-end;
 }
 
 
