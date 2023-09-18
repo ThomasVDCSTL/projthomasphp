@@ -43,19 +43,24 @@ function import_to_panier(int $productID, int $nb): void
 
 function is_in_cart(int $productID): bool
 {
-    $flag=false;
-    $sql = 'SELECT product_id FROM product_order WHERE order_id= :customer';
+    $flag = false;
+    $i = 0;
+    $sql = 'SELECT product_id FROM product_order WHERE order_id = :customer';
     $db = include 'db_mysql.php';
     $stmt = $db->prepare($sql);
     $stmt->execute([':customer' => $_SESSION['customer_id']]);
-    while (!$flag&&$i<count($stmt)):
-        $flag = $temp===$productID;
+    $temp=$stmt->fetchAll();
+    while (!$flag && $i < count($temp)):
+        if ($temp[$i][0] === $productID):
+            $flag = true;
+        endif;
+        $i = $i + 1;
     endwhile;
     unset($db);
     return $flag;
 }
 
-function display_article_in_cart (array $article):
-{
-
-}
+//function display_article_in_cart (array $article):
+//{
+//
+//}

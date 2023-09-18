@@ -13,11 +13,15 @@ function display_articles(array $articles): void
                 <p><?php echo $article["description"] ?></p>
                 <div class="ajout_panier">
                     <form action="index.php" method="get">
-                        <label class="quantity" for="quantity">Quantité : </label><input type="number" name="quantité" max="99" min="1" value="1">
+                        <label class="quantity" for="quantity">Quantité : </label><input type="number" name="quantité"
+                                                                                         max="99" min="1" value="1">
                         <input type="hidden" name="product_id" value="<?php echo $article['product_id'] ?>">
-                        <button name="AjoutPanier" type="submit" <?php if ($article["available"] === 0): ?>disabled class="indispo">Produit<br>indisponible<?php else:
-                        ?> class="dispo" >Ajouter<br>au panier <?php endif;
-                        ?>
+                        <button name="AjoutPanier" type="submit" <?php if ($article["available"] === 0): ?>disabled
+                                class="indispo">
+                            Produit<br>indisponible<?php elseif (is_in_cart($article['product_id'])): ?>disabled class="indispo" >Produit
+                                <br>ajouté<?php else:
+                                ?> class="dispo" >Ajouter<br>au panier <?php endif;
+                            ?>
                         </button>
                     </form>
                 </div>
@@ -50,17 +54,14 @@ function discountedPrice(float $price, float $discount): float
 //echo formatPrice(discountedPrice(1000, 20));
 
 
-
-
-
 $panier = $_SESSION["panier"];
 
 function import_to_paniers(array $produit, int $nb): void
 {
-        global $panier;
-        $produit["quantité"]=$nb;
-        $panier[$produit['nom']] = $produit;
-        $_SESSION["panier"]=$panier;
+    global $panier;
+    $produit["quantité"] = $nb;
+    $panier[$produit['nom']] = $produit;
+    $_SESSION["panier"] = $panier;
 }
 
 function calcShipment1(array $panier): float
@@ -96,20 +97,20 @@ function calcShipment3(array $panier): float
     }
 }
 
-function totalWeight(array $panier) : float
+function totalWeight(array $panier): float
 {
-    $poid=0;
-    foreach ($panier as $article){
-        $poid=$poid+$article['poid']*$article['quantité'];
+    $poid = 0;
+    foreach ($panier as $article) {
+        $poid = $poid + $article['poid'] * $article['quantité'];
     };
     return $poid;
 }
 
 function prix_panier(array $panier): float
 {
-    $prix=0;
-    foreach ($panier as $article){
-        $prix=$prix+$article['prix']*$article['quantité'];
+    $prix = 0;
+    foreach ($panier as $article) {
+        $prix = $prix + $article['prix'] * $article['quantité'];
     };
     return $prix;
 }

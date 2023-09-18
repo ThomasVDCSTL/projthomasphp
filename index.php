@@ -15,6 +15,7 @@ if (isset($_GET["product_id"])) {
 
         <?php
         display_articles(import_products());
+
         ?>
 
 
