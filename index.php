@@ -5,7 +5,7 @@ include 'fonctions_sql.php';
 include 'item.php';
 include 'fonctions.php';
 if (isset($_GET["product_id"])) {
-    import_to_panier($_GET["product_id"],$_GET["quantity"]);
+    import_to_panier($_GET["product_id"],$_GET["quantité"]);
     header('Location:http://localhost/projphp/index.php');
 };
 

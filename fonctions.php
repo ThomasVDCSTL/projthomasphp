@@ -14,7 +14,7 @@ function display_articles(array $articles): void
                 <div class="ajout_panier">
                     <form action="index.php" method="get">
                         <label class="quantity" for="quantity">Quantité : </label><input type="number" name="quantité" max="99" min="1" value="1">
-                        <input type="hidden" name="product_id" value="<?php echo $article['id'] ?>">
+                        <input type="hidden" name="product_id" value="<?php echo $article['product_id'] ?>">
                         <button name="AjoutPanier" type="submit" <?php if ($article["available"] === 0): ?>disabled class="indispo">Produit<br>indisponible<?php else:
                         ?> class="dispo" >Ajouter<br>au panier <?php endif;
                         ?>
