@@ -1,24 +1,25 @@
 <?php
 global $articles;
 global $panier;
-function display_articles(array $articles): void
-{
-    foreach ($articles as $nom => $article):?>
+include_once 'fonctions_sql.php';
+include_once 'Classes/Item.php';
+function display_articles(\Classes\Item $article): void
+{?>
         <div class="produit">
             <div class="texte_produit">
                 <div class="gras">
-                    <p><?php echo $article['name']; ?></p>
-                    <p><?php echo formatPrice($article["price"]); ?></p>
+                    <p><?php echo $article->getName(); ?></p>
+                    <p><?php echo formatPrice($article->getPrice()); ?></p>
                 </div>
-                <p><?php echo $article["description"] ?></p>
+                <p><?php echo $article->getDescription() ?></p>
                 <div class="ajout_panier">
                     <form action="index.php" method="get">
                         <label class="quantity" for="quantity">Quantité : </label><input type="number" name="quantité"
                                                                                          max="99" min="1" value="1">
-                        <input type="hidden" name="product_id" value="<?php echo $article['product_id'] ?>">
-                        <button name="AjoutPanier" type="submit" <?php if ($article["available"] === 0): ?>disabled
+                        <input type="hidden" name="product_id" value="<?php echo $article->getProductId() ?>">
+                        <button name="AjoutPanier" type="submit" <?php if (!$article->getAvailable()): ?>disabled
                                 class="indispo">
-                            Produit<br>indisponible<?php elseif (is_in_cart($article['product_id'])): ?>disabled class="indispo" >Produit
+                            Produit<br>indisponible<?php elseif (is_in_cart($article->getProductId())): ?>disabled class="indispo" >Produit
                                 <br>ajouté<?php else:
                                 ?> class="dispo" >Ajouter<br>au panier <?php endif;
                             ?>
@@ -26,10 +27,9 @@ function display_articles(array $articles): void
                     </form>
                 </div>
             </div>
-            <img src="<?php echo $article["picture"] ?>" alt="photo de<?php echo $article['name'] ?>">
+            <img src="<?php echo $article->getImageUrl() ?>" alt="photo de<?php echo $article->getName() ?>">
         </div>
-    <?php endforeach;
-}
+    <?}
 
 function formatPrice(float $price): string
 {
@@ -113,4 +113,11 @@ function prix_panier(array $panier): float
         $prix = $prix + $article['prix'] * $article['quantité'];
     };
     return $prix;
+}
+
+function display_catalogue(array $cat){
+    foreach ($cat as $produit){
+        display_articles($produit);
+    }
+
 }

@@ -19,7 +19,7 @@ function new_customer(string $name, int $phone, int $zip, string $address, strin
     unset($db);
 }
 
-function import_products(): array
+function get_product_list(): array
 {
     $sql = 'SELECT * FROM products';
     $db = include 'db_mysql.php';
@@ -28,6 +28,16 @@ function import_products(): array
     $products = $stmt->fetchAll();
     unset($db);
     return $products;
+}
+
+function get_product(string $itemName):array{
+    $sql = 'SELECT * FROM products WHERE name=:name LIMIT 1';
+    $db = include 'db_mysql.php';
+    $stmt = $db->prepare($sql);
+    $stmt->execute([':name' => $itemName]);
+    $product = $stmt->fetchAll();
+    unset($db);
+    return $product[0];
 }
 
 

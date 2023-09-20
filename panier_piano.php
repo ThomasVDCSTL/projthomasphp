@@ -1,9 +1,9 @@
 <?php
 $nom_page = "Panier";
-include 'header.php';
-include 'fonctions.php';
-include 'fonctions_sql.php';
-include 'item.php';
+include_once 'header.php';
+include_once 'fonctions.php';
+include_once 'fonctions_sql.php';
+include_once 'item.php';
 
 //if (isset($_GET["AjoutPanier"])) {
 //    if (!isset($panier[$_GET['nomProduit']]) || $_GET["quantité"] != $panier[$_GET['nomProduit']]["quantité"]) {
@@ -129,5 +129,5 @@ $prixTotal = 0;
 
 <?php global $prixTotal;
 
-include 'footer.php'; ?>
+include_once 'footer.php'; ?>
 
